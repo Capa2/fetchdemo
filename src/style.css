@@ -37,3 +37,7 @@ ul.header li a:hover:not(.active) {
   height: 1000px;
   font-size: small;
 }
+
+#delStatus {
+  margin-top:10px;
+}

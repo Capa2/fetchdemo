@@ -37,6 +37,7 @@
       <!-- This is were you should place your basic HTML for exercise-2 -->
       <div id="ex2_html" style="display:none;">
         <h3>API Jokes</h3>
+        <button id="ex2b" style="margin:10px 0 10px 0;">Get Joke</button>
         <p id="ex2p">Add your basic HTML for Exercise 2 here</p>
       </div>
       <!-- End of HTML for exercise-2 -->
@@ -66,17 +67,34 @@
         </div>
         <div class="col-md-4" style="background-color: powderblue;">
           <h5>Find User</h5>
+          <input id="findThisId" maxlength="5" type="number"/>
+          <button id="findBtn">Find</button>
+          <p id="foundUser"></p>
         </div>
       </div>
       <div class="row" style="min-height: 5em;">
         <div class="col-md-4" style="background-color: powderblue;">
           <h5>Add User</h5>
+          <input id="addUserName"/>
+          <input id="addUserAge"/>
+          <input id="addUserGender"/>
+          <input id="addUserEmail"/>
+          <button id="addBtn">add</button>
         </div>
         <div class="col-md-4" style="background-color: lightgrey;">
           <h5>Edit User</h5>
+          <input id="editUserId"/>
+          <input id="editUserName"/>
+          <input id="editUserAge"/>
+          <input id="editUserGender"/>
+          <input id="editUserEmail"/>
+          <button id="editBtn">Edit</button>
         </div>
         <div class="col-md-4" style="background-color: powderblue;">
           <h5>Delete User</h5>
+          <input id="delThisId" maxlength="5" type="number"/>
+          <button id="delBtn">delete</button>
+          <div class="alert" id="delStatus"></div>
         </div>
       </div>
       <!-- </div> -->
@@ -87,7 +105,7 @@
     </div>
 
     <div id="about_html" style="display:none;">
-      <h3>Fuck you!</h3>
+      <h3>No!</h3>
       <p>You can't tell me what to do!</p>
     </div>
     <!-- End of HTML for ABOUT Page -->

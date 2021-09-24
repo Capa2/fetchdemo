@@ -1,6 +1,5 @@
 import "./style.css"
 import "bootstrap/dist/css/bootstrap.css"
-import "./jokeFacade"
 import jokeFacade from "./jokeFacade"
 import userFacade from "./userFacade"
 
@@ -25,6 +24,7 @@ fetch('https://api.chucknorris.io/jokes/random')
   .then(data => document.getElementById("ex2p").innerHTML = JSON.stringify(data.value));
 }
 loadChuckJoke();
+document.getElementById("ex2b").onclick = loadChuckJoke;
 
 /* JS For Exercise-3 below */
 userFacade.getUsers()
@@ -40,8 +40,32 @@ userFacade.getUsers()
     `)
     const userRowsAsString = userRows.join("");
     document.getElementById("allUserRows").innerHTML = userRowsAsString;
-  })
-  
+  });
+
+//document.getElementById("delBtn").onclick = userFacade.deleteUser(document.getElementById("delThisId").value);
+document.getElementById("delBtn").addEventListener("click", function() {
+  const id = document.getElementById("delThisId").value;
+  let succes = false;
+  userFacade.deleteUser(id).then(res => {
+    if (res == 200) {
+    document.getElementById("delStatus").innerHTML = "Succesfully deleted id: " + id;
+    document.getElementById("delStatus").classList.remove("alert-danger");
+    document.getElementById("delStatus").classList.add("alert-success");
+    } else {
+      document.getElementById("delStatus").innerHTML = "Failed to delete id: " + id;
+      document.getElementById("delStatus").classList.remove("alert-success");  
+      document.getElementById("delStatus").classList.add("alert-danger");    
+    }});
+});
+
+document.getElementById("findBtn").addEventListener("click", function() {
+  userFacade.getUser(document.getElementById("findThisId").value)
+  .then(user=> {
+    document.getElementById("foundUser").innerHTML = `Id: ${user.id} <br> Name: ${user.name} <br> Age: ${user.age} <br> Gender: ${user.gender} <br> Email: ${user.email}`;
+  });
+
+  //document.getElementById("foundUser").innerHTML = result.name;
+});
   /* 
 Do NOT focus on the code below, UNLESS you want to use this code for something different than
 the Period2-week2-day3 Exercises
