@@ -2,6 +2,7 @@ import "./style.css"
 import "bootstrap/dist/css/bootstrap.css"
 import "./jokeFacade"
 import jokeFacade from "./jokeFacade"
+import userFacade from "./userFacade"
 
 document.getElementById("all-content").style.display = "block"
 
@@ -10,16 +11,38 @@ document.getElementById("all-content").style.display = "block"
 */
 
 /* JS For Exercise-1 below */
-
-
+function makeListItems() {
+const jokes = jokeFacade.getJokes();
+let jokeLis = jokes.map(joke => "<li>" + joke + "</li>"); // alternative: `<li> ${joke} </li>`
+const listItemAsStr = jokeLis.join("");
+document.getElementById("jokes").innerHTML = listItemAsStr;
+}
+makeListItems();
 /* JS For Exercise-2 below */
-
-
+function loadChuckJoke() {
+fetch('https://api.chucknorris.io/jokes/random')
+  .then(response => response.json())
+  .then(data => document.getElementById("ex2p").innerHTML = JSON.stringify(data.value));
+}
+loadChuckJoke();
 
 /* JS For Exercise-3 below */
-
-
-/* 
+userFacade.getUsers()
+  .then(users=>{
+    const userRows = users.map(user =>`
+      <tr>
+      <td>${user.id}</td>
+      <td>${user.age}</td>
+      <td>${user.name}</td>
+      <td>${user.gender}</td>
+      <td>${user.email}</td>
+      </tr>
+    `)
+    const userRowsAsString = userRows.join("");
+    document.getElementById("allUserRows").innerHTML = userRowsAsString;
+  })
+  
+  /* 
 Do NOT focus on the code below, UNLESS you want to use this code for something different than
 the Period2-week2-day3 Exercises
 */
