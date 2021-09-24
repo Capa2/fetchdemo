@@ -16,13 +16,13 @@ function getUser(id) {
 
 function addUser(user) {
   return fetch(url, httpUtil.makeOptions("POST", user))
-    .then(res => httpUtil.handleHttpErrors(res))
+    .then(res => httpUtil.handleHttpErrorsGetStatus(res))
     .catch(httpUtil.errCatch);
 }
 
 function editUser(user){
-  fetch(url + "/" + user.id, httpUtil.makeOptions("PUT", user))
-  .then(res => httpUtil.handleHttpErrors(res))
+  return fetch(url + "/" + user.id, httpUtil.makeOptions("PUT", user))
+  .then(res => httpUtil.handleHttpErrorsGetStatus(res))
   .catch(httpUtil.errCatch);
 }
 

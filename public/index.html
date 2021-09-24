@@ -11,7 +11,7 @@
   <!--
     This div is added to remove the flicker that comes from bootstrap being loaded
     first in index.js
-    REMEMBER to set display to "block" in index.js, otherwise you will not see anything
+    REMEMBER to set display to "" in index.js, otherwise you will not see anything
   -->
   <div id="all-content" style="display: none;">
     <ul id="menu" class="header">
@@ -37,7 +37,7 @@
       <!-- This is were you should place your basic HTML for exercise-2 -->
       <div id="ex2_html" style="display:none;">
         <h3>API Jokes</h3>
-        <button id="ex2b" style="margin:10px 0 10px 0;">Get Joke</button>
+        <button class="btn btn btn-lg btn-primary" id="ex2b" style="margin:10px 0 10px 0;">Get Joke</button>
         <p id="ex2p">Add your basic HTML for Exercise 2 here</p>
       </div>
       <!-- End of HTML for exercise-2 -->
@@ -48,9 +48,9 @@
         <h3>Ex-3</h3>
         <p>Add your basic HTML for Exercise 3 here</p>
 
-        <div class="row" style="min-height: 5em;"">
-      <div class=" col-md-8 pre-scrollable" style="background-color: lightgrey;">
-          <h5>All Users</h5>
+        <div class="row" style="min-height: 8em;"">
+      <div class=" col-md-8 pre-scrollable border-primary border" style="background-color: rgb(225,225,225);">
+          <h4>All Users</h4>
           <table class="table">
             <thead>
               <tr>
@@ -65,35 +65,39 @@
             <tbody>
           </table>
         </div>
-        <div class="col-md-4" style="background-color: powderblue;">
-          <h5>Find User</h5>
-          <input id="findThisId" maxlength="5" type="number"/>
-          <button id="findBtn">Find</button>
-          <p id="foundUser"></p>
+        <div class="col-md-4" style="background-color: rgb(245,245,245);">
+          <h4>Find User</h4>
+          <input id="findThisId" class="form-control mb-2 w-100" placeholder="id" maxlength="5" type="number" />
+          <button class="btn btn btn-lg btn-primary mb-2" id="findBtn">Find</button>
+          <p id="foundUser" class="alert"></p>
         </div>
       </div>
       <div class="row" style="min-height: 5em;">
-        <div class="col-md-4" style="background-color: powderblue;">
-          <h5>Add User</h5>
-          <input id="addUserName"/>
-          <input id="addUserAge"/>
-          <input id="addUserGender"/>
-          <input id="addUserEmail"/>
-          <button id="addBtn">add</button>
+        <div class="col-md-4" style="background-color: rgb(245,245,245);">
+          <h4>Add User</h4>
+          <div class="input-group">
+            <input class="form-control mb-2 w-100" placeholder="name" id="addUserName" />
+            <input class="form-control mb-2 w-100" placeholder="age" type="number" id="addUserAge" />
+            <input class="form-control mb-2 w-100" placeholder="gender" id="addUserGender" />
+            <input class="form-control mb-2 w-100" placeholder="email" id="addUserEmail" />
+          </div>
+          <button class="btn btn btn-lg btn-primary" id="addBtn">add</button>
+          <div class="alert" id="addStatus"></div>
         </div>
-        <div class="col-md-4" style="background-color: lightgrey;">
-          <h5>Edit User</h5>
-          <input id="editUserId"/>
-          <input id="editUserName"/>
-          <input id="editUserAge"/>
-          <input id="editUserGender"/>
-          <input id="editUserEmail"/>
-          <button id="editBtn">Edit</button>
+        <div class="col-md-4" style="background-color: rgb(225,225,225);">
+          <h4>Edit User</h4>
+          <input class="form-control mb-2 w-100" placeholder="id" type="number" id="editUserId" />
+          <input class="form-control mb-2 w-100" placeholder="name" id="editUserName" />
+          <input class="form-control mb-2 w-100" placeholder="age" type="number" id="editUserAge" />
+          <input class="form-control mb-2 w-100" placeholder="gender" id="editUserGender" />
+          <input class="form-control mb-2 w-100" placeholder="email" id="editUserEmail" />
+          <button class="btn btn btn-lg btn-primary" id="editBtn">Edit</button>
+          <div class="alert" id="editStatus"></div>
         </div>
-        <div class="col-md-4" style="background-color: powderblue;">
-          <h5>Delete User</h5>
-          <input id="delThisId" maxlength="5" type="number"/>
-          <button id="delBtn">delete</button>
+        <div class="col-md-4" style="background-color: rgb(245,245,245);">
+          <h4>Delete User</h4>
+          <input class="form-control mb-2 w-100" placeholder="id" id="delThisId" maxlength="5" type="number" />
+          <button class="btn btn btn-lg btn-primary" id="delBtn">delete</button>
           <div class="alert" id="delStatus"></div>
         </div>
       </div>
@@ -113,11 +117,6 @@
 
     <!--End of all content -->
   </div>
-
-  <!-- #################################################################-->
-  <!-- IMPORTANT  DO NOT IMPORT ANY JavaScript in this file by YOURSELF -->
-  <!-- #################################################################-->
-
 </body>
 
 </html>
