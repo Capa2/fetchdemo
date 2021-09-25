@@ -8,7 +8,7 @@ document.getElementById("all-content").style.display = "block"
 /* JS For Exercise-1 below */
 function makeListItems() {
   const jokes = jokeFacade.getJokes();
-  let jokeLis = jokes.map(joke => "<li>" + joke + "</li>"); // alternative: `<li> ${joke} </li>`
+  const jokeLis = jokes.map(joke => "<li>" + joke + "</li>"); // alternative: `<li> ${joke} </li>`
   const listItemAsStr = jokeLis.join("");
   document.getElementById("jokes").innerHTML = listItemAsStr;
 }
@@ -23,6 +23,31 @@ loadChuckJoke();
 document.getElementById("ex2b").onclick = loadChuckJoke;
 
 /* JS For Exercise-3 below */
+// HELPER FUNCTIONS
+function buildUserFromInputs(inputClass) {
+  const user = new Object;
+  const inputs = document.getElementsByClassName(inputClass);
+  for (let input of inputs) {
+    user[input.getAttribute("name")] = input.value;
+    input.value = "";
+  }
+  return user;
+}
+
+function updateAlert(id, status, text) {
+  document.getElementById(id).innerHTML = text;
+  document.getElementById(id).classList.remove("alert-success");
+  document.getElementById(id).classList.remove("alert-danger");
+  document.getElementById(id).classList.remove("alert-info");
+  switch (status) {
+    case "success":
+      document.getElementById(id).classList.add("alert-success"); break
+    case "fail":
+      document.getElementById(id).classList.add("alert-danger"); break
+    default:
+      document.getElementById(id).classList.add("alert-info"); break
+  }
+}
 // GET ALL
 function updateUserList() {
   userFacade.getUsers()
@@ -54,7 +79,6 @@ document.getElementById("addBtn").addEventListener("click", function () {
   userFacade.addUser(user).then(res => {
     if (res != undefined) updateAlert("addUserAlert", "success", "Succesfully added id user " + user.name);
     else updateAlert("addUserAlert", "fail", "Failed to add user " + user.name);
-    var addUserInputs = document.getElementsByClassName("addUserInput");
     updateUserList();
   });
 });
@@ -79,31 +103,6 @@ document.getElementById("delBtn").addEventListener("click", function () {
     updateUserList();
   });
 });
-
-function buildUserFromInputs(inputClass) {
-  let user = new Object;
-  let inputs = document.getElementsByClassName(inputClass);
-  for (let input of inputs) {
-    user[input.getAttribute("name")] = input.value;
-    input.value = "";
-  }
-  return user;
-}
-
-function updateAlert(id, status, text) {
-  document.getElementById(id).innerHTML = text;
-  document.getElementById(id).classList.remove("alert-success");
-  document.getElementById(id).classList.remove("alert-danger");
-  document.getElementById(id).classList.remove("alert-info");
-  switch (status) {
-    case "success":
-      document.getElementById(id).classList.add("alert-success"); break
-    case "fail":
-      document.getElementById(id).classList.add("alert-danger"); break
-    default:
-      document.getElementById(id).classList.add("alert-info"); break
-  }
-}
 /* 
 Do NOT focus on the code below, UNLESS you want to use this code for something different than
 the Period2-week2-day3 Exercises
@@ -129,6 +128,3 @@ function menuItemClicked(evt) {
 }
 document.getElementById("menu").onclick = menuItemClicked;
 hideAllShowOne("about_html");
-
-
-
