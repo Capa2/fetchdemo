@@ -5,10 +5,6 @@ import userFacade from "./userFacade"
 
 document.getElementById("all-content").style.display = "block"
 
-/* 
-  Add your JavaScript for all exercises Below or in separate js-files, which you must the import above
-*/
-
 /* JS For Exercise-1 below */
 function makeListItems() {
   const jokes = jokeFacade.getJokes();
@@ -28,110 +24,86 @@ document.getElementById("ex2b").onclick = loadChuckJoke;
 
 /* JS For Exercise-3 below */
 // GET ALL
-function getAll() {
+function updateUserList() {
   userFacade.getUsers()
     .then(users => {
-      const userRows = users.map(user => `
-      <tr>
+      const userRows = users.map(user => `<tr>
       <td>${user.id}</td>
       <td>${user.age}</td>
       <td>${user.name}</td>
       <td>${user.gender}</td>
-      <td>${user.email}</td>
-      </tr>
-    `)
+      <td>${user.email}</td></tr>`)
       const userRowsAsString = userRows.join("");
       document.getElementById("allUserRows").innerHTML = userRowsAsString;
     });
 }
-getAll();
+updateUserList();
 // GET SINGLE
-document.getElementById("findBtn").addEventListener("click", function () {
-  userFacade.getUser(document.getElementById("findThisId").value)
+document.getElementById("getBtn").addEventListener("click", function () {
+  userFacade.getUser(document.getElementById("getTarget").value)
     .then(user => {
-      if (user.id > 0) {
-        document.getElementById("foundUser").innerHTML = `Id: ${user.id} <br> Name: ${user.name} <br> Age: ${user.age} <br> Gender: ${user.gender} <br> Email: ${user.email}`;
-        document.getElementById("foundUser").classList.remove("alert-danger");
-        document.getElementById("foundUser").classList.add("alert-info");
-      } else {
-        document.getElementById("foundUser").innerHTML = "Failed to get user";
-        document.getElementById("foundUser").classList.add("alert-danger");
-        document.getElementById("foundUser").classList.remove("alert-info");
-      }
-      document.getElementById("findThisId").value = "";
+      if (user != undefined) updateAlert("getUserAlert", "info", `Id: ${user.id} <br> Name: ${user.name} <br> Age: ${user.age} <br> Gender: ${user.gender} <br> Email: ${user.email}`);
+      else updateAlert("getUserAlert", "fail", "Failed to get user");
+      document.getElementById("getTarget").value = "";
     });
 });
 
 // ADD
 document.getElementById("addBtn").addEventListener("click", function () {
-  const user = {
-    name: document.getElementById("addUserName").value,
-    age: document.getElementById("addUserAge").value,
-    gender: document.getElementById("addUserGender").value,
-    email: document.getElementById("addUserEmail").value
-  };
-  userFacade.addUser(user).then(status => {
-    if (status == 200) {
-      document.getElementById("addStatus").innerHTML = "Succesfully added id user " + user.name;
-      document.getElementById("addStatus").classList.remove("alert-danger");
-      document.getElementById("addStatus").classList.add("alert-success");
-    } else {
-      document.getElementById("addStatus").innerHTML = "Failed to add user " + user.name;
-      document.getElementById("addStatus").classList.remove("alert-success");
-      document.getElementById("addStatus").classList.add("alert-danger");
-    }
-    document.getElementById("addUserName").value = "";
-    document.getElementById("addUserAge").value = "";
-    document.getElementById("addUserGender").value = "";
-    document.getElementById("addUserEmail").value = "";
-    getAll();
+  const user = buildUserFromInputs("addUserInput");
+  userFacade.addUser(user).then(res => {
+    if (res != undefined) updateAlert("addUserAlert", "success", "Succesfully added id user " + user.name);
+    else updateAlert("addUserAlert", "fail", "Failed to add user " + user.name);
+    var addUserInputs = document.getElementsByClassName("addUserInput");
+    updateUserList();
   });
 });
 
 // EDIT
 document.getElementById("editBtn").addEventListener("click", function () {
-  const user = {
-    id: document.getElementById("editUserId").value,
-    name: document.getElementById("editUserName").value,
-    age: document.getElementById("editUserAge").value,
-    gender: document.getElementById("editUserGender").value,
-    email: document.getElementById("editUserEmail").value
-  };
-  const status = userFacade.editUser(user).then(status => {
-    if (status == 200) {
-      document.getElementById("editStatus").innerHTML = "Succesfully updated id: " + user.id;
-      document.getElementById("editStatus").classList.remove("alert-danger");
-      document.getElementById("editStatus").classList.add("alert-success");
-    } else {
-      document.getElementById("editStatus").innerHTML = "Failed to update id: " + user.id;
-      document.getElementById("editStatus").classList.remove("alert-success");
-      document.getElementById("editStatus").classList.add("alert-danger");
-    }
-    document.getElementById("editUserName").value = "";
-    document.getElementById("editUserAge").value = "";
-    document.getElementById("editUserGender").value = "";
-    document.getElementById("editUserEmail").value = "";
-    getAll();
+  const user = buildUserFromInputs("editUserInput");
+  userFacade.editUser(user).then(res => {
+    if (res != undefined) updateAlert("editUserAlert", "success", "Succesfully updated id: " + user.id);
+    else updateAlert("editUserAlert", "fail", "Failed to update id: " + user.id);
+    updateUserList();
   });
 });
 
 // DELETE
 document.getElementById("delBtn").addEventListener("click", function () {
-  const id = document.getElementById("delThisId").value;
-  userFacade.deleteUser(id).then(status => {
-    if (status == 200) {
-      document.getElementById("delStatus").innerHTML = "Succesfully deleted id: " + id;
-      document.getElementById("delStatus").classList.remove("alert-danger");
-      document.getElementById("delStatus").classList.add("alert-success");
-    } else {
-      document.getElementById("delStatus").innerHTML = "Failed to delete id: " + id;
-      document.getElementById("delStatus").classList.remove("alert-success");
-      document.getElementById("delStatus").classList.add("alert-danger");
-    }
-    document.getElementById("delThisId").value = "";
-    getAll();
+  const id = document.getElementById("delTarget").value;
+  userFacade.deleteUser(id).then(res => {
+    if (res != undefined) updateAlert("delUserAlert", "success", "Succesfully deleted id: " + id);
+    else updateAlert("delUserAlert", "fail", "Failed to delete id: " + id);
+    document.getElementById("delTarget").value = "";
+    updateUserList();
   });
 });
+
+function buildUserFromInputs(inputClass) {
+  let user = new Object;
+  let inputs = document.getElementsByClassName(inputClass);
+  for (let input of inputs) {
+    user[input.getAttribute("name")] = input.value;
+    input.value = "";
+  }
+  return user;
+}
+
+function updateAlert(id, status, text) {
+  document.getElementById(id).innerHTML = text;
+  document.getElementById(id).classList.remove("alert-success");
+  document.getElementById(id).classList.remove("alert-danger");
+  document.getElementById(id).classList.remove("alert-info");
+  switch (status) {
+    case "success":
+      document.getElementById(id).classList.add("alert-success"); break
+    case "fail":
+      document.getElementById(id).classList.add("alert-danger"); break
+    default:
+      document.getElementById(id).classList.add("alert-info"); break
+  }
+}
 /* 
 Do NOT focus on the code below, UNLESS you want to use this code for something different than
 the Period2-week2-day3 Exercises

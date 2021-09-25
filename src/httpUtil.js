@@ -19,12 +19,6 @@ function handleHttpErrors(res){
     return res.json();
 }
 
-function handleHttpErrorsGetStatus(res){
-    if(!res.ok){
-      return Promise.reject({status: res.status, fullError: res.json() })
-    } else return res.status;
-}
-
 function errCatch(err) {
     if(err.status){
     err.fullError.then(e=> console.log(e.msg))
@@ -35,7 +29,6 @@ function errCatch(err) {
 const httpUtil = {
     makeOptions,
     handleHttpErrors,
-    handleHttpErrorsGetStatus,
     errCatch,
   }
 

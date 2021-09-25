@@ -16,19 +16,19 @@ function getUser(id) {
 
 function addUser(user) {
   return fetch(url, httpUtil.makeOptions("POST", user))
-    .then(res => httpUtil.handleHttpErrorsGetStatus(res))
+    .then(res => httpUtil.handleHttpErrors(res))
     .catch(httpUtil.errCatch);
 }
 
 function editUser(user){
   return fetch(url + "/" + user.id, httpUtil.makeOptions("PUT", user))
-  .then(res => httpUtil.handleHttpErrorsGetStatus(res))
+  .then(res => httpUtil.handleHttpErrors(res))
   .catch(httpUtil.errCatch);
 }
 
 function deleteUser(id){
   return fetch(url + "/" + id, httpUtil.makeOptions("DELETE"))
-  .then(res => httpUtil.handleHttpErrorsGetStatus(res))
+  .then(res => httpUtil.handleHttpErrors(res))
   .catch(httpUtil.errCatch);
 }
 
