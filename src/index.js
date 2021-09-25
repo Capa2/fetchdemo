@@ -35,17 +35,18 @@ function buildUserFromInputs(inputClass) {
 }
 
 function updateAlert(id, status, text) {
-  document.getElementById(id).innerHTML = text;
-  document.getElementById(id).classList.remove("alert-success");
-  document.getElementById(id).classList.remove("alert-danger");
-  document.getElementById(id).classList.remove("alert-info");
+  let alert = document.getElementById(id);
+  alert.innerHTML = text;
+  alert.classList.remove("alert-success");
+  alert.classList.remove("alert-danger");
+  alert.classList.remove("alert-info");
   switch (status) {
     case "success":
-      document.getElementById(id).classList.add("alert-success"); break
+      alert.classList.add("alert-success"); break
     case "fail":
-      document.getElementById(id).classList.add("alert-danger"); break
+      alert.classList.add("alert-danger"); break
     default:
-      document.getElementById(id).classList.add("alert-info"); break
+      alert.classList.add("alert-info"); break
   }
 }
 
