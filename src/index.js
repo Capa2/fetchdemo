@@ -48,7 +48,8 @@ function updateAlert(id, status, text) {
       document.getElementById(id).classList.add("alert-info"); break
   }
 }
-// GET ALL
+
+// CREATE/UPDATE USER LIST
 function updateUserList() {
   userFacade.getUsers()
     .then(users => {
@@ -63,7 +64,8 @@ function updateUserList() {
     });
 }
 updateUserList();
-// GET SINGLE
+
+// GET USER
 document.getElementById("getBtn").addEventListener("click", function () {
   userFacade.getUser(document.getElementById("getTarget").value)
     .then(user => {
@@ -73,7 +75,7 @@ document.getElementById("getBtn").addEventListener("click", function () {
     });
 });
 
-// ADD
+// ADD USER
 document.getElementById("addBtn").addEventListener("click", function () {
   const user = buildUserFromInputs("addUserInput");
   userFacade.addUser(user).then(res => {
@@ -83,7 +85,7 @@ document.getElementById("addBtn").addEventListener("click", function () {
   });
 });
 
-// EDIT
+// EDIT USER
 document.getElementById("editBtn").addEventListener("click", function () {
   const user = buildUserFromInputs("editUserInput");
   userFacade.editUser(user).then(res => {
@@ -93,7 +95,7 @@ document.getElementById("editBtn").addEventListener("click", function () {
   });
 });
 
-// DELETE
+// DELETE USER
 document.getElementById("delBtn").addEventListener("click", function () {
   const id = document.getElementById("delTarget").value;
   userFacade.deleteUser(id).then(res => {
@@ -103,11 +105,8 @@ document.getElementById("delBtn").addEventListener("click", function () {
     updateUserList();
   });
 });
-/* 
-Do NOT focus on the code below, UNLESS you want to use this code for something different than
-the Period2-week2-day3 Exercises
-*/
 
+// SITE NAVIGATION
 function hideAllShowOne(idToShow) {
   document.getElementById("about_html").style = "display:none"
   document.getElementById("ex1_html").style = "display:none"
