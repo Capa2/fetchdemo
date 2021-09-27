@@ -1,109 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Fetch Demo</title>
+	</head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fetch Demo</title>
-</head>
-
-<body>
-  <!--
+	<body>
+		<!--
     This div is added to remove the flicker that comes from bootstrap being loaded
     first in index.js
     REMEMBER to set display to "" in index.js, otherwise you will not see anything
   -->
-  <div id="all-content" style="display: none;">
-    <ul id="menu" class="header">
-      <li><a href="" id="about">About</a></li>
-      <li><a href="" id="ex1">Ex1</a></li>
-      <li><a href="" id="ex2">Ex2</a></li>
-      <li><a href="" id="ex3">Ex3</a></li>
-    </ul>
-    <div class="content">
-      <!-- This is were you should place your basic HTML for exercise-1 -->
-      <div id="ex1_html" style="display:none;">
-        <h3>Static Jokes</h3>
-        <ul id="jokes"></ul>
-      </div> <!-- End of HTML for exercise-1 -->
+		<div id="all-content" style="display: none">
+			<ul id="menu" class="header">
+				<li><a href="" id="about">About</a></li>
+				<li><a href="" id="ex1">Ex1</a></li>
+				<li><a href="" id="ex2">Ex2</a></li>
+				<li><a href="" id="ex3">Ex3</a></li>
+			</ul>
+			<div class="content">
+				<!-- This is were you should place your basic HTML for exercise-1 -->
+				<div id="ex1_html" style="display: none">
+					<h3>Static Jokes</h3>
+					<ul id="jokes"></ul>
+				</div>
+				<!-- End of HTML for exercise-1 -->
 
-      <!-- This is were you should place your basic HTML for exercise-2 -->
-      <div id="ex2_html" style="display:none;">
-        <h3>Chuck Norris Jokes</h3>
-        <p class="alert alert-dark mt-4" id="ex2p"></p>
-        <button class="btn btn btn-lg btn-primary" id="ex2b" style="margin:10px 0 10px 0;">Get Joke</button>
-      </div> <!-- End of HTML for exercise-2 -->
+				<!-- This is were you should place your basic HTML for exercise-2 -->
+				<div id="ex2_html" style="display: none">
+					<h3>Chuck Norris Jokes</h3>
+					<p class="alert alert-dark mt-4" id="ex2p"></p>
+					<button
+						class="btn btn btn-lg btn-primary"
+						id="ex2b"
+						style="margin: 10px 0 10px 0"
+					>
+						Get Joke
+					</button>
+				</div>
+				<!-- End of HTML for exercise-2 -->
 
+				<!-- This is were you should place your basic HTML for exercise-3 -->
+				<div id="ex3_html" style="display: none">
+					<h1>User Database</h1>
+					<div class="row" style="height: 26.2em;"">
+					<div
+						class="col-md-8 pre-scrollable border-primary border"
+						style="background-color: rgb(225, 225, 225)"
+					>
+						<h4>All Users</h4>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Age</th>
+									<th>Name</th>
+									<th>Gender</th>
+									<th>Email</th>
+								</tr>
+							</thead>
+							<tbody id="allUserRows"></tbody>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div class="col-md-4" style="background-color: rgb(245, 245, 245)">
+						<h4>Find User</h4>
+						<input
+							id="getTarget"
+							class="form-control mb-2 w-100"
+							placeholder="id"
+							maxlength="5"
+							type="number"
+						/>
+						<button class="btn btn btn-lg btn-primary mb-2 mt-2" id="getBtn">
+							Find
+						</button>
+						<p id="getUserAlert" class="alert"></p>
+					</div>
+				</div>
+				<div class="row" style="min-height: 5em">
+					<div class="col-md-4" style="background-color: rgb(245, 245, 245)">
+						<h4>Add User</h4>
+						<div class="input-group">
+							<input
+								class="addUserInput form-control mb-2 w-100"
+								name="name"
+								placeholder="name"
+								id="addUserName"
+							/>
+							<input
+								class="addUserInput form-control mb-2 w-100"
+								name="age"
+								placeholder="age"
+								type="number"
+								id="addUserAge"
+							/>
+							<input
+								class="addUserInput form-control mb-2 w-100"
+								name="gender"
+								placeholder="gender"
+								id="addUserGender"
+							/>
+							<input
+								class="addUserInput form-control mb-2 w-100"
+								name="email"
+								placeholder="email"
+								id="addUserEmail"
+							/>
+						</div>
+						<button class="btn btn btn-lg btn-primary mb-2 mt-2" id="addBtn">
+							add
+						</button>
+						<div class="alert" id="addUserAlert"></div>
+					</div>
+					<div class="col-md-4" style="background-color: rgb(225, 225, 225)">
+						<h4>Edit User</h4>
+						<input
+							class="editUserInput form-control mb-2 w-100"
+							name="id"
+							placeholder="id"
+							type="number"
+							id="editUserId"
+						/>
+						<input
+							class="editUserInput form-control mb-2 w-100"
+							name="name"
+							placeholder="name"
+							id="editUserName"
+						/>
+						<input
+							class="editUserInput form-control mb-2 w-100"
+							name="age"
+							placeholder="age"
+							type="number"
+							id="editUserAge"
+						/>
+						<input
+							class="editUserInput form-control mb-2 w-100"
+							name="gender"
+							placeholder="gender"
+							id="editUserGender"
+						/>
+						<input
+							class="editUserInput form-control mb-2 w-100"
+							name="email"
+							placeholder="email"
+							id="editUserEmail"
+						/>
+						<button class="btn btn btn-lg btn-primary mb-2 mt-2" id="editBtn">
+							Edit
+						</button>
+						<div class="alert" id="editUserAlert"></div>
+					</div>
+					<div class="col-md-4" style="background-color: rgb(245, 245, 245)">
+						<h4>Delete User</h4>
+						<input
+							class="form-control mb-2 w-100"
+							placeholder="id"
+							id="delTarget"
+							maxlength="5"
+							type="number"
+						/>
+						<button class="btn btn btn-lg btn-primary mb-2 mt-2" id="delBtn">
+							delete
+						</button>
+						<div class="alert" id="delUserAlert"></div>
+					</div>
+				</div>
+			</div>
+			<!-- End of HTML for exercise-3 -->
 
-      <!-- This is were you should place your basic HTML for exercise-3 -->
-      <div id="ex3_html" style="display:none;">
-        <h1>User Database</h1>
-        <div class="row" style="min-height: 8em;"">
-      <div class=" col-md-8 pre-scrollable border-primary border" style="background-color: rgb(225,225,225);">
-          <h4>All Users</h4>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Age</th>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Email </th>
-              </tr>
-            </thead>
-            <tbody id="allUserRows">
-            <tbody>
-          </table>
-        </div>
-        <div class="col-md-4" style="background-color: rgb(245,245,245);">
-          <h4>Find User</h4>
-          <input id="getTarget" class="form-control mb-2 w-100" placeholder="id" maxlength="5" type="number" />
-          <button class="btn btn btn-lg btn-primary mb-2 mt-2" id="getBtn">Find</button>
-          <p id="getUserAlert" class="alert"></p>
-        </div>
-      </div>
-      <div class="row" style="min-height: 5em;">
-        <div class="col-md-4" style="background-color: rgb(245,245,245);">
-          <h4>Add User</h4>
-          <div class="input-group">
-            <input class="addUserInput form-control mb-2 w-100" name="name" placeholder="name" id="addUserName" />
-            <input class="addUserInput form-control mb-2 w-100" name="age" placeholder="age" type="number" id="addUserAge" />
-            <input class="addUserInput form-control mb-2 w-100" name="gender" placeholder="gender" id="addUserGender" />
-            <input class="addUserInput form-control mb-2 w-100" name="email" placeholder="email" id="addUserEmail" />
-          </div>
-          <button class="btn btn btn-lg btn-primary mb-2 mt-2" id="addBtn">add</button>
-          <div class="alert" id="addUserAlert"></div>
-        </div>
-        <div class="col-md-4" style="background-color: rgb(225,225,225);">
-          <h4>Edit User</h4>
-          <input class="editUserInput form-control mb-2 w-100" name="id" placeholder="id" type="number"
-            id="editUserId" />
-          <input class="editUserInput form-control mb-2 w-100" name="name" placeholder="name" id="editUserName" />
-          <input class="editUserInput form-control mb-2 w-100" name="age" placeholder="age" type="number"
-            id="editUserAge" />
-          <input class="editUserInput form-control mb-2 w-100" name="gender" placeholder="gender" id="editUserGender" />
-          <input class="editUserInput form-control mb-2 w-100" name="email" placeholder="email" id="editUserEmail" />
-          <button class="btn btn btn-lg btn-primary mb-2 mt-2" id="editBtn">Edit</button>
-          <div class="alert" id="editUserAlert"></div>
-        </div>
-        <div class="col-md-4" style="background-color: rgb(245,245,245);">
-          <h4>Delete User</h4>
-          <input class="form-control mb-2 w-100" placeholder="id" id="delTarget" maxlength="5" type="number" />
-          <button class="btn btn btn-lg btn-primary mb-2 mt-2" id="delBtn">delete</button>
-          <div class="alert" id="delUserAlert"></div>
-        </div>
-      </div>
-    </div> <!-- End of HTML for exercise-3 -->
-
-    <!---- HTML for the About page -->
-    <div id="about_html" style="display:none;">
-      <h3>No!</h3>
-      <p>You can't tell me what to do!</p>
-    </div>
-    <!-- End of HTML for ABOUT Page -->
-
-  </div>
-  <!--End of all content -->
-</body>
-
+			<!---- HTML for the About page -->
+			<div id="about_html" style="display: none">
+				<h3>No!</h3>
+				<p>You can't tell me what to do!</p>
+			</div>
+			<!-- End of HTML for ABOUT Page -->
+		</div>
+		<!--End of all content -->
+	</body>
 </html>
