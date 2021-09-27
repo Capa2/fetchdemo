@@ -58,9 +58,9 @@ function setAlert(id, status, text) {
 
 // CREATE/UPDATE USER LIST
 function updateUserList() {
-	const usertable = document.querySelector(".table");
+	const usertable = document.querySelector("#allUserRows");
 	const scrollBox = document.querySelector(".pre-scrollable");
-	const scrollPos = scrollable.scrollTop;
+	const scrollPos = scrollBox.scrollTop;
 	usertable.innerHTML = "";
 	userFacade.getUsers().then((users) => {
 		users.map((user) => {
